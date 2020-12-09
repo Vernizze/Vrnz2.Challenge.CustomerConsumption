@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Shared\Validations\**" />
+    <EmbeddedResource Remove="Shared\Validations\**" />
+    <None Remove="Shared\Validations\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentValidation" Version="9.3.0" />
+    <PackageReference Include="MassTransit" Version="7.0.7" />
+    <PackageReference Include="MassTransit.AmazonSQS" Version="7.0.7" />
+    <PackageReference Include="Serilog" Version="2.10.0" />
+    <PackageReference Include="Vrnz2.Challenge.ServiceContracts" Version="1.0.6" />
+    <PackageReference Include="Vrnz2.Data.MongoDB" Version="1.0.4" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,38 @@
+{
+  "LocaleMessages": [
+    {
+      "LocaleName": "pt-BR",
+      "Messages": [
+        {
+          "Code": "CREATE_PAYMENT_00001",
+          "Message": "Requisição de Criação de Pagamento Inválida!"
+        },
+        {
+          "Code": "CREATE_PAYMENT_00002",
+          "Message": "Pagamento já existente!"
+        },
+        {
+          "Code": "CREATE_PAYMENT_00003",
+          "Message": "Requisição de Consulta de Pagamentos inválida!"
+        }
+      ]
+    },
+    {
+      "LocaleName": "en-US",
+      "Messages": [
+        {
+          "Code": "CREATE_PAYMENT_00001",
+          "Message": "Invalid Payment creation request!"
+        },
+        {
+          "Code": "CREATE_PAYMENT_00002",
+          "Message": "Payment already exists!"
+        },
+        {
+          "Code": "CREATE_PAYMENT_00003",
+          "Message": "Invalid Payments sarch request!"
+        }
+      ]
+    }
+  ]
+}
