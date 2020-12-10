@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vrnz2.Challenge.CustomerCon
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vrnz2.Challenge.CustomerConsumption", "Vrnz2.Challenge.CustomerConsumption\Vrnz2.Challenge.CustomerConsumption.csproj", "{7E62295E-0913-4146-82AD-F14A661CF33B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vrnz2.Challenge.CustomerConsumption.Tests", "Vrnz2.Challenge.CustomerConsumption.Tests\Vrnz2.Challenge.CustomerConsumption.Tests.csproj", "{9B83D200-D26C-46E4-B2DC-388A94FB061F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{7E62295E-0913-4146-82AD-F14A661CF33B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7E62295E-0913-4146-82AD-F14A661CF33B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7E62295E-0913-4146-82AD-F14A661CF33B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9B83D200-D26C-46E4-B2DC-388A94FB061F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9B83D200-D26C-46E4-B2DC-388A94FB061F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9B83D200-D26C-46E4-B2DC-388A94FB061F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9B83D200-D26C-46E4-B2DC-388A94FB061F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

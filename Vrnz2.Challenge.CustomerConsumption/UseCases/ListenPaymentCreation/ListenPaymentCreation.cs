@@ -78,27 +78,7 @@ namespace Vrnz2.Challenge.CustomerConsumption.UseCases.ListenPaymentCreation
             {
                 try
                 {
-                    var cpf = new Cpf(notification.Cpf).Value;
-
-                    using (var mongo = new Data.MongoDB.MongoDB(_connectionStringsSettings.MongoDbChallenge, MONGODB_COLLECTION, MONGODB_DATABASE))
-                    {
-                        var name = string.Empty;
-
-                        var registers = await mongo.GetMany<Vrnz2.Challenge.CustomerConsumption.Shared.Entities.CustomerConsumption>(c => c.Cpf == cpf);
-
-                        if (registers.HaveAny())
-                            name = registers.First().CustomerName;
-
-                        await mongo.Add(new Vrnz2.Challenge.CustomerConsumption.Shared.Entities.CustomerConsumption
-                        {
-                            Cpf = new Cpf(notification.Cpf).Value,
-                            CustomerName = name,
-                            PaymentDate = notification.CreationDate,
-                            YearReference = notification.CreationDate.Year,
-                            MonthReference = notification.CreationDate.Month,
-                            Value = notification.Value
-                        });
-                    }
+                    await InsertCustomerConsumption(notification);
                 }
                 catch (Exception ex)
                 {
@@ -107,6 +87,31 @@ namespace Vrnz2.Challenge.CustomerConsumption.UseCases.ListenPaymentCreation
                     _logger.Error(ex, errorMessage);
 
                     throw;
+                }
+            }
+
+            public virtual async Task InsertCustomerConsumption(PaymentNotification.Created notification)
+            {
+                var cpf = new Cpf(notification.Cpf).Value;
+
+                using (var mongo = new Data.MongoDB.MongoDB(_connectionStringsSettings.MongoDbChallenge, MONGODB_COLLECTION, MONGODB_DATABASE))
+                {
+                    var name = string.Empty;
+
+                    var registers = await mongo.GetMany<Vrnz2.Challenge.CustomerConsumption.Shared.Entities.CustomerConsumption>(c => c.Cpf == cpf);
+
+                    if (registers.HaveAny())
+                        name = registers.First().CustomerName;
+
+                    await mongo.Add(new Vrnz2.Challenge.CustomerConsumption.Shared.Entities.CustomerConsumption
+                    {
+                        Cpf = new Cpf(notification.Cpf).Value,
+                        CustomerName = name,
+                        PaymentDate = notification.CreationDate,
+                        YearReference = notification.CreationDate.Year,
+                        MonthReference = notification.CreationDate.Month,
+                        Value = notification.Value
+                    });
                 }
             }
 

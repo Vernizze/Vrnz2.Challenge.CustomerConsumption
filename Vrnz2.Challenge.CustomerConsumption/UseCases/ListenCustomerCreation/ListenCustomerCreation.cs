@@ -77,29 +77,7 @@ namespace Vrnz2.Challenge.CustomerConsumption.UseCases.ListenCustomerCreation
             {
                 try
                 {
-                    var cpf = new Cpf(notification.Cpf).Value;
-
-                    using (var mongo = new Data.MongoDB.MongoDB(_connectionStringsSettings.MongoDbChallenge, MONGODB_COLLECTION, MONGODB_DATABASE))
-                    {
-                        var register = await mongo.GetMany<Vrnz2.Challenge.CustomerConsumption.Shared.Entities.CustomerConsumption>(c => c.Cpf == cpf);
-
-                        if (register.HaveAny())
-                        {
-                            await mongo.Update<Vrnz2.Challenge.CustomerConsumption.Shared.Entities.CustomerConsumption, string>((c => c.Cpf == cpf), (c => c.CustomerName), notification.Name);
-                        }
-                        else
-                        {
-                            await mongo.Add(new Vrnz2.Challenge.CustomerConsumption.Shared.Entities.CustomerConsumption
-                            {
-                                Cpf = cpf,
-                                CustomerName = notification.Name,
-                                PaymentDate = notification.CreationDate,
-                                YearReference = notification.CreationDate.Year,
-                                MonthReference = notification.CreationDate.Month,
-                                Value = 0
-                            });
-                        }
-                    }
+                    await UpsertCustomerConsumption(notification);
                 }
                 catch (Exception ex)
                 {
@@ -108,6 +86,33 @@ namespace Vrnz2.Challenge.CustomerConsumption.UseCases.ListenCustomerCreation
                     _logger.Error(ex, errorMessage);
 
                     throw;
+                }
+            }
+
+            public virtual async Task UpsertCustomerConsumption(CustomerNotification.Created notification) 
+            {
+                var cpf = new Cpf(notification.Cpf).Value;
+
+                using (var mongo = new Data.MongoDB.MongoDB(_connectionStringsSettings.MongoDbChallenge, MONGODB_COLLECTION, MONGODB_DATABASE))
+                {
+                    var register = await mongo.GetMany<Vrnz2.Challenge.CustomerConsumption.Shared.Entities.CustomerConsumption>(c => c.Cpf == cpf);
+
+                    if (register.HaveAny())
+                    {
+                        await mongo.Update<Vrnz2.Challenge.CustomerConsumption.Shared.Entities.CustomerConsumption, string>((c => c.Cpf == cpf), (c => c.CustomerName), notification.Name);
+                    }
+                    else
+                    {
+                        await mongo.Add(new Vrnz2.Challenge.CustomerConsumption.Shared.Entities.CustomerConsumption
+                        {
+                            Cpf = cpf,
+                            CustomerName = notification.Name,
+                            PaymentDate = notification.CreationDate,
+                            YearReference = notification.CreationDate.Year,
+                            MonthReference = notification.CreationDate.Month,
+                            Value = 0
+                        });
+                    }
                 }
             }
 
